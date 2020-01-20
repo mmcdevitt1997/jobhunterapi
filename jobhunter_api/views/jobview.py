@@ -13,7 +13,7 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             view_name='job',
             lookup_field='id'
         )
-        fields = ('id', 'user', 'title', 'salary', 'job_link', 'active
+        fields = ('id', 'user', 'title', 'salary', 'job_link', 'active') 
         depth = 1
 
 class Job(ViewSet):
