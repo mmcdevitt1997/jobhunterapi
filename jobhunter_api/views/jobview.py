@@ -13,11 +13,23 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             view_name='job',
             lookup_field='id'
         )
-        fields = ('id', 'user', 'title', 'salary', 'job_link', 'active') 
+        fields = ('id', 'title', 'salary', 'salary_currency', 'job_link', 'active')
         depth = 1
 
 class Job(ViewSet):
     queryset = JobModel.objects.all()
+    def list(self, request):
+        """
+        GET all
+        List out all of different inventory in the machine
+        """
+        job = JobModel.objects.all()
+
+        serializer = JobSerializer(
+        job, many=True, context={'request': request})
+
+        return Response(serializer.data, status=200)
+
     def create(self, request):
         """Handle POST operations
         Returns:

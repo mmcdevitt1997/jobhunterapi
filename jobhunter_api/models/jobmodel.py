@@ -2,6 +2,11 @@ from djmoney.models.fields import MoneyField
 from django.contrib.auth.models import User
 from django.db import models
 
+"""
+This model sets up the data structure for a job that and is
+the center of the app.
+"""
+
 class JobModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)

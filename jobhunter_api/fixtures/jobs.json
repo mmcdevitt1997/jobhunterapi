@@ -1,0 +1,14 @@
+[
+  {
+    "model": "jobhunter_api.jobmodel",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "title":"jr Dev",
+      "salary": "10000",
+      "salary_currency": "USD",
+      "job_link": "link",
+      "active": true
+    }
+  }
+]
