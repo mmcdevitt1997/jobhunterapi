@@ -21,7 +21,7 @@ class Job(ViewSet):
     def list(self, request):
         """
         GET all
-        List out all of different inventory in the machine
+        List out all of jobs for a user
         """
         job = JobModel.objects.all()
 
@@ -33,7 +33,7 @@ class Job(ViewSet):
     def create(self, request):
         """Handle POST operations
         Returns:
-            Response -- JSON serializes college instance
+            Response -- JSON serializes job instance
         """
         new_job = JobModel()
         new_job.user = request.auth.user

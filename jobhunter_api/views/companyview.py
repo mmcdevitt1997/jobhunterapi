@@ -18,6 +18,16 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
 
 class Company(ViewSet):
     queryset = CompanyModel.objects.all()
+    def list(self, request):
+        """
+        GET all
+        List out all of contacts for a user
+        """
+        company = CompanyModel.objects.all()
+
+        serializer = CompanySerializer(
+        company, many=True, context={'request': request})
+        return Response(serializer.data, status=200)
     def create(self, request):
         """Handle POST operations
         Returns:

@@ -18,6 +18,16 @@ class StageSerializer(serializers.HyperlinkedModelSerializer):
 
 class Stage(ViewSet):
     queryset = StageModel.objects.all()
+    def list(self, request):
+        """
+        GET all
+        List out all of contacts for a user
+        """
+        stage = StageModel.objects.all()
+
+        serializer = StageSerializer(
+        stage, many=True, context={'request': request})
+        return Response(serializer.data, status=200)
     def create(self, request):
         """Handle POST operations
         Returns:
