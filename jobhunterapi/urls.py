@@ -2,13 +2,14 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from jobhunter_api.views import *
+from jobhunter_api.models import *
 
 router = routers.DefaultRouter(trailing_slash=False)
 
-router.register(r'jobs', Job)
-router.register(r'contacts', Contact)
-router.register(r'companys', Company)
-router.register(r'stages', Stage)
+router.register(r'job', Job, 'JobModel')
+router.register(r'contact', Contact, 'ContactModel')
+router.register(r'company', Company, 'CompanyModel')
+router.register(r'stage', Stage, 'StageModel')
 
 
 

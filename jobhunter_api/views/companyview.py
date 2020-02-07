@@ -13,11 +13,23 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
             view_name='company',
             lookup_field='id'
         )
-        fields = ('id', 'name', 'should_apply', 'job')
-        depth = 1
+        fields = ('id', 'name', 'should_apply', 'job_id')
+        depth = 2
+
 
 class Company(ViewSet):
     queryset = CompanyModel.objects.all()
+    def list(self, request):
+        """
+        GET all
+        List out all of contacts for a user
+        """
+        company = CompanyModel.objects.all()
+
+        serializer = CompanySerializer(
+        company, many=True, context={'request': request})
+        return Response(serializer.data, status=200)
+
     def create(self, request):
         """Handle POST operations
         Returns:

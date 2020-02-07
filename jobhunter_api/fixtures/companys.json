@@ -1,0 +1,11 @@
+[
+    {
+      "model": "jobhunter_api.companymodel",
+      "pk": 1,
+      "fields": {
+        "name": "eventbrite",
+        "should_apply": true,
+        "job": 1
+      }
+    }
+  ]

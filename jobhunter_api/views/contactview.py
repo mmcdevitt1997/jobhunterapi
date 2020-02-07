@@ -13,11 +13,22 @@ class ContactSerializer(serializers.HyperlinkedModelSerializer):
             view_name='contact',
             lookup_field='id'
         )
-        fields = ('id', 'first_name', 'last_name', 'phone_number', 'title', 'company','email')
-        depth = 1
+        fields = ('id', 'first_name', 'last_name', 'phone_number', 'title', 'email', 'company_id')
+
 
 class Contact(ViewSet):
     queryset = ContactModel.objects.all()
+    def list(self, request):
+        """
+        GET all
+        List out all of contacts for a user
+        """
+        contact = ContactModel.objects.all()
+
+        serializer = ContactSerializer(
+        contact, many=True, context={'request': request})
+
+        return Response(serializer.data, status=200)
     def create(self, request):
         """Handle POST operations
         Returns:

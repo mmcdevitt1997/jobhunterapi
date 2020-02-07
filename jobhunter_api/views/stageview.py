@@ -5,19 +5,32 @@ from rest_framework import serializers
 from rest_framework import status
 from jobhunter_api.models.stagemodel import StageModel
 from jobhunter_api.models.jobmodel import JobModel
+from jobhunter_api.views.jobview import JobSerializer
 
 class StageSerializer(serializers.HyperlinkedModelSerializer):
+    # job = serializers.StringRelatedField(many=False)
     class Meta:
         model = StageModel
         url = serializers.HyperlinkedIdentityField(
             view_name='stage',
             lookup_field='id'
         )
-        fields = ('id', 'name', 'note', 'date', 'job')
-        depth = 1
+        fields = ('id', 'name', 'note', 'date', 'job_id')
+
 
 class Stage(ViewSet):
     queryset = StageModel.objects.all()
+
+    def list(self, request):
+        """
+        GET all
+        List out all of contacts for a user
+        """
+        stage = StageModel.objects.all()
+        serializer = StageSerializer(
+            stage, many=True, context={'request': request})
+        return Response(serializer.data, status=200)
+
     def create(self, request):
         """Handle POST operations
         Returns:
@@ -31,6 +44,7 @@ class Stage(ViewSet):
         new_stage.save()
         serializer = StageSerializer(new_stage, context={'request': request})
         return Response(serializer.data)
+
     def retrieve(self, request, pk=None):
         try:
             stage = StageModel.objects.get(pk=pk)
@@ -52,11 +66,10 @@ class Stage(ViewSet):
         try:
             stage = StageModel.objects.get(pk=pk)
             stage.delete()
-
             return Response({}, status=status.HTTP_204_NO_CONTENT)
 
         except StageModel.DoesNotExist as ex:
-         return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
         except Exception as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -1,0 +1,12 @@
+[
+    {
+      "model": "jobhunter_api.stagemodel",
+      "pk": 1,
+      "fields": {
+        "name": "Phone call",
+        "note":"it was a good phone here are some things I should look up",
+        "date": "2018-03-11",
+        "job": 1
+    }
+}
+]

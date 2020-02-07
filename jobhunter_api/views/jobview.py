@@ -13,15 +13,27 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             view_name='job',
             lookup_field='id'
         )
-        fields = ('id', 'user', 'title', 'salary', 'job_link', 'active') 
-        depth = 1
+        fields = ('id', 'title', 'salary', 'salary_currency', 'job_link', 'active')
+
 
 class Job(ViewSet):
     queryset = JobModel.objects.all()
+    def list(self, request):
+        """
+        GET all
+        List out all of jobs for a user
+        """
+        job = JobModel.objects.all()
+
+        serializer = JobSerializer(
+        job, many=True, context={'request': request})
+
+        return Response(serializer.data, status=200)
+
     def create(self, request):
         """Handle POST operations
         Returns:
-            Response -- JSON serializes college instance
+            Response -- JSON serializes job instance
         """
         new_job = JobModel()
         new_job.user = request.auth.user
