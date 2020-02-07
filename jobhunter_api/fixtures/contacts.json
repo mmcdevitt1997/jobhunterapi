@@ -1,0 +1,14 @@
+[
+    {
+      "model": "jobhunter_api.contactmodel",
+      "pk": 1,
+      "fields": {
+        "first_name": "John",
+        "last_name":"Smith",
+        "email": "johnsmith@gmail.com",
+        "phone_number": "615-333-3333",
+        "title": "HR",
+        "company": 1
+      }
+    }
+  ]

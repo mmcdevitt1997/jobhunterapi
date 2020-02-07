@@ -6,18 +6,18 @@ from jobhunter_api.models import *
 
 router = routers.DefaultRouter(trailing_slash=False)
 
-router.register(r'jobs', Job, 'JobModel')
-router.register(r'contacts', Contact)
-router.register(r'companys', Company)
-router.register(r'stages', Stage)
+router.register(r'job', Job, 'JobModel')
+router.register(r'contact', Contact, 'ContactModel')
+router.register(r'company', Company, 'CompanyModel')
+router.register(r'stage', Stage, 'StageModel')
 
 
 
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    # url(r'^api-token-auth/', obtain_auth_token),
+    url(r'^api-token-auth/', obtain_auth_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # url(r'^register$', register_user),
-    # url(r'^login$', login_user),
+    url(r'^register$', register_user),
+    url(r'^login$', login_user),
 ]

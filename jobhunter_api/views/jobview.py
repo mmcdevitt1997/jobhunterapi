@@ -14,7 +14,7 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
             lookup_field='id'
         )
         fields = ('id', 'title', 'salary', 'salary_currency', 'job_link', 'active')
-        depth = 1
+
 
 class Job(ViewSet):
     queryset = JobModel.objects.all()
